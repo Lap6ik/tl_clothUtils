@@ -7,13 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>578</width>
-    <height>666</height>
+    <height>803</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_4">
     <property name="leftMargin">
      <number>40</number>
@@ -30,29 +36,94 @@
     <item>
      <widget class="QWidget" name="widget" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout">
-       <property name="rightMargin">
-        <number>6</number>
-       </property>
        <item>
         <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
-          <string>clothObject</string>
+          <string>clothObjects</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QWidget" name="widget_9" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <property name="leftMargin">
-           <number>12</number>
+           <number>18</number>
+          </property>
+          <property name="rightMargin">
+           <number>6</number>
           </property>
           <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
-           <widget class="QComboBox" name="clothObjComboBox">
+           <widget class="QListWidget" name="clothObjectsListWidget">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget_8" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>colliderObjects</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_12" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QListWidget" name="colliderObjectListWidget">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -67,31 +138,64 @@
     </item>
     <item>
      <widget class="QWidget" name="widget_10" native="true">
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
-       <property name="topMargin">
-        <number>0</number>
-       </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QPushButton" name="selectClothObj">
+        <widget class="QPushButton" name="invertSelectionBtn">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(73, 227, 163);
 color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
-          <string>selectCloth</string>
+          <string>invertSelection</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="createGraphForClothBtn">
+        <widget class="QPushButton" name="coloriseNamesByCollisionLayerBtn">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(73, 227, 163);
 color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
-          <string>createGraphForCloth</string>
+          <string>coloriseNamesByCollisionLayer</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="coloriseNamesBySelectedGroupBtn">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(73, 227, 163);
+color: rgb(0, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>coloriseNamesBySelectedGroup</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget_11" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <property name="topMargin">
+        <number>12</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>selectGroupByColor</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="selectGroupByColourComboBox"/>
        </item>
       </layout>
      </widget>
@@ -116,16 +220,23 @@ color: rgb(0, 0, 0);</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QCheckBox" name="disableClothObjectCheckBox">
+           <widget class="QCheckBox" name="visibilityCheckBox">
             <property name="text">
-             <string>disableClothObject</string>
+             <string>visibility</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="disableCollisionLayerCheckBox">
+           <widget class="QCheckBox" name="isolateSelectCheckBox">
             <property name="text">
-             <string>disableCollisionLayer</string>
+             <string>isolateSelect</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="enableCheckBox">
+            <property name="text">
+             <string>enable</string>
             </property>
            </widget>
           </item>
@@ -139,13 +250,6 @@ color: rgb(0, 0, 0);</string>
      <widget class="QWidget" name="widget_3" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>coloriseCloth</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QWidget" name="widget_4" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -155,18 +259,18 @@ color: rgb(0, 0, 0);</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QPushButton" name="colorisePixelBtn">
+           <widget class="QPushButton" name="coloriseByShellBtn">
             <property name="styleSheet">
              <string notr="true">background-color: rgb(73, 227, 163);
 color: rgb(0, 0, 0);</string>
             </property>
             <property name="text">
-             <string>colorisePixel</string>
+             <string>coloriseByShell</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="coloriseObjectBtn">
+           <widget class="QPushButton" name="coloriseByObjectBtn">
             <property name="autoFillBackground">
              <bool>false</bool>
             </property>
@@ -175,104 +279,29 @@ color: rgb(0, 0, 0);</string>
 color: rgb(0, 0, 0);</string>
             </property>
             <property name="text">
-             <string>coloriseObject</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QWidget" name="widget_8" native="true">
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <property name="rightMargin">
-        <number>12</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>colliderObject</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="colliderObjComboBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QWidget" name="widget_11" native="true">
-      <layout class="QHBoxLayout" name="horizontalLayout_7">
-       <item>
-        <widget class="QPushButton" name="selectColliderBtn">
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(73, 227, 163);
-color: rgb(0, 0, 0);</string>
-         </property>
-         <property name="text">
-          <string>selectCollider</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="createGraphForColliderBtn">
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(73, 227, 163);
-color: rgb(0, 0, 0);</string>
-         </property>
-         <property name="text">
-          <string>createGraphForCollider</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QWidget" name="widget_6" native="true">
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
-       <item>
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>colliderAction</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="widget_7" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QCheckBox" name="disableColliderObjCheckBox">
-            <property name="text">
-             <string>disableColllider</string>
+             <string>coloriseByObject</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="coloriseObjectBtn_2">
+           <widget class="QPushButton" name="pushButton_2">
             <property name="styleSheet">
              <string notr="true">background-color: rgb(73, 227, 163);
 color: rgb(0, 0, 0);</string>
             </property>
             <property name="text">
-             <string>coloriseCollider</string>
+             <string>coloriseWholeGroup</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(73, 227, 163);
+color: rgb(0, 0, 0);</string>
+            </property>
+            <property name="text">
+             <string>coloriseGreyLambert</string>
             </property>
            </widget>
           </item>

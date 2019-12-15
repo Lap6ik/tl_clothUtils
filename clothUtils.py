@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 from PySide2 import QtWidgets, QtGui, QtCore
 import os, sys
-#import shutil
-#import subprocess
+# import shutil
+# import subprocess
 import pymel.core as pm
+# from importlib import reload
 
 import clothUtilsUI as ui
 reload(ui)
@@ -33,9 +34,9 @@ class ClothUtils(QtWidgets.QMainWindow):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
         #class veriables
-        self.clothShapeNodes = None
         self.clothTransformNodes = None
-        
+        self.colliderTransformNodes = None
+        self.currentSelection = []
 
         self.__buildUI()
 
@@ -46,52 +47,60 @@ class ClothUtils(QtWidgets.QMainWindow):
         self.ui = ui.Ui_MainWindow()
         self.ui.setupUi(self)
 
-        #fill the buttons 
-        self.__updateNodeLists()
+        # fill the buttons 
+        self.__updateClothObjectsListWidget()
+        self.__updateColliderObjectListWidget()
 
-        self._updateClothObjComboBox() 
-        self.ui.clothObjComboBox.currentIndexChanged.connect(self._updateDisableClothObjectCheckBox)
+        #----------Signals-----------#
+        self.ui.clothObjectsListWidget.itemClicked.connect(self._clothObjectSelect)
 
-        #self.ui.clothObjComboBox.currentIndexChanged(self._updateClothObjComboBox)
+    def __updateClothObjectsListWidget(self):
+        self.ui.clothObjectsListWidget.clear()
+        self.ui.clothObjectsListWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        clothShapeNodes = pm.ls(exactType='nCloth')
+        self.clothTransformNodes = pm.listRelatives(clothShapeNodes, parent = True ) 
+        for obj in self.clothTransformNodes:
+            b = obj.shortName(stripNamespace=True)
+            self.ui.clothObjectsListWidget.addItem(b)
 
-
+    def __updateColliderObjectListWidget(self):
+        self.ui.colliderObjectListWidget.clear()
+        self.ui.colliderObjectListWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        colliderShapeNodes = pm.ls(exactType='nRigid')
+        self.colliderTransformNodes = pm.listRelatives(colliderShapeNodes, parent = True ) 
+        for obj in self.colliderTransformNodes:
+            b = obj.shortName(stripNamespace=True)
+            self.ui.colliderObjectListWidget.addItem(b)
+    
+    def _clothObjectSelect(self):
+        item = self.ui.clothObjectsListWidget.currentItem()
+        itemName = item.text()
+        print (itemName)
+        print (type(itemName))
+        if self.ui.clothObjectsListWidget.isItemSelected(item):
+            #if current item selected do the 
+            if not self.currentSelection:
+                a = pm.select(itemName, replace = True)
+                self.currentSelection.append(itemName)
+                print ('we are in option one')
+            else:
+                a = pm.select(itemName, add = True)
+                self.currentSelection.append(itemName)
+                print ('we are in option two')
+            print ('selected objects list %s'%self.currentSelection)
         
-        # -------Signals-------------#   
+        
+        selectedNames = self.ui.clothObjectsListWidget.selectedItems()
+        print ('%s\n'%selectedNames)
+            
+        
+        # clothEnabled = pm.getAttr('%s.isDynamic'%obj)
 
-    def __updateNodeLists(self):
-        self.clothShapeNodes = pm.ls(exactType='nCloth')
-        self.clothTransformNodes = pm.listRelatives(self.clothShapeNodes, parent = True)
-        #self._updateDisableClothObjectCheckBox()
+        #attributeChange = pm.scriptJob(attributeChange = [obj+'.isDynamic', self._printN])
 
-    def _updateClothObjComboBox(self):
-        self.__updateNodeLists()
-        for obj in self.clothTransformNodes:
-            b = obj.shortName(stripNamespace=True)
-            self.ui.clothObjComboBox.addItem(b)
-        self.ui.clothObjComboBox.clearEditText() 
-
-    def _updateDisableClothObjectCheckBox(self):
-        clothName = str(self.ui.clothObjComboBox.currentText())
-        for obj in self.clothTransformNodes:
-            b = obj.shortName(stripNamespace=True)
-            if b==clothName:
-                pm.select(obj)
-                break
-
-        #clothEnabled = pm.getAttr('%s.isDynamic'%obj)
-
-        attributeChange = pm.scriptJob(attributeChange = [obj+'.isDynamic', self._printN])
-        print (attributeChange)
     
     def _printN(self):
-        print('attribute changed')
-  
-        # if clothEnabled == 1 and self.ui.disableClothObjectCheckBox.isChecked():
-        #     pass
-        # elif clothEnabled ==1 and not self.ui.disableClothObjectCheckBox.isChecked():
-        #     self.ui.disableClothObjectCheckBox.setChecked(True)
-        # else:
-        #     self.ui.disableClothObjectCheckBox.setChecked(False)
+        print('attribute changed') 
 
 # def main():
 #     '''
