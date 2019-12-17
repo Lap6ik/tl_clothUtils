@@ -121,7 +121,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <widget class="QListWidget" name="colliderObjectListWidget">
+           <widget class="QListWidget" name="colliderObjectsListWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>

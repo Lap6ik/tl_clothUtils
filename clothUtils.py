@@ -2,7 +2,6 @@
 from PySide2 import QtWidgets, QtGui, QtCore
 import os, sys
 # import shutil
-# import subprocess
 import pymel.core as pm
 # from importlib import reload
 
@@ -34,9 +33,10 @@ class ClothUtils(QtWidgets.QMainWindow):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
         #class veriables
-        self.clothTransformNodes = None
-        self.colliderTransformNodes = None
-        self.currentSelection = []
+        self.clothTransformNodes = []
+        self.clothShapeNodes = []
+        self.colliderTransformNodes = []
+        self.selectedItems = []
 
         self.__buildUI()
 
@@ -52,7 +52,8 @@ class ClothUtils(QtWidgets.QMainWindow):
         self.__updateColliderObjectListWidget()
 
         #----------Signals-----------#
-        self.ui.clothObjectsListWidget.itemClicked.connect(self._clothObjectSelect)
+        self.ui.clothObjectsListWidget.itemClicked.connect(self._itemSelect)
+        self.ui.colliderObjectsListWidget.itemClicked.connect(self._itemSelect)
 
     def __updateClothObjectsListWidget(self):
         self.ui.clothObjectsListWidget.clear()
@@ -61,38 +62,50 @@ class ClothUtils(QtWidgets.QMainWindow):
         self.clothTransformNodes = pm.listRelatives(clothShapeNodes, parent = True ) 
         for obj in self.clothTransformNodes:
             b = obj.shortName(stripNamespace=True)
-            self.ui.clothObjectsListWidget.addItem(b)
+            a = pm.listRelatives(obj, children = True, shapes = True)
+            c = pm.listConnections(a,source = True,type = 'mesh')
+            d = c[0].shortName(stripNamespace = True)
+            item = '%s --> %s'%(b,d)
+            self.ui.clothObjectsListWidget.addItem(item)
 
     def __updateColliderObjectListWidget(self):
-        self.ui.colliderObjectListWidget.clear()
-        self.ui.colliderObjectListWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.ui.colliderObjectsListWidget.clear()
+        self.ui.colliderObjectsListWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         colliderShapeNodes = pm.ls(exactType='nRigid')
         self.colliderTransformNodes = pm.listRelatives(colliderShapeNodes, parent = True ) 
         for obj in self.colliderTransformNodes:
-            b = obj.shortName(stripNamespace=True)
-            self.ui.colliderObjectListWidget.addItem(b)
+            b = obj.shortName(stripNamespace = True)
+            a = pm.listRelatives(obj, children = True, shapes = True)
+            c = pm.listConnections(a,source = True,type = 'mesh')
+            d = c[0].shortName(stripNamespace = True)
+            item = '%s --> %s'%(b,d)
+            self.ui.colliderObjectsListWidget.addItem(item)
     
-    def _clothObjectSelect(self):
-        item = self.ui.clothObjectsListWidget.currentItem()
-        itemName = item.text()
-        print (itemName)
-        print (type(itemName))
-        if self.ui.clothObjectsListWidget.isItemSelected(item):
-            #if current item selected do the 
-            if not self.currentSelection:
-                a = pm.select(itemName, replace = True)
-                self.currentSelection.append(itemName)
-                print ('we are in option one')
-            else:
-                a = pm.select(itemName, add = True)
-                self.currentSelection.append(itemName)
-                print ('we are in option two')
-            print ('selected objects list %s'%self.currentSelection)
-        
-        
-        selectedNames = self.ui.clothObjectsListWidget.selectedItems()
-        print ('%s\n'%selectedNames)
-            
+    def _itemSelect(self):
+        items = []
+        for k in range(self.ui.clothObjectsListWidget.count()):
+            items.append(self.ui.clothObjectsListWidget.item(k))
+        for k in range(self.ui.colliderObjectsListWidget.count()):
+            items.append(self.ui.colliderObjectsListWidget.item(k))
+        for item in items:
+            itemName = item.text()
+            #print (itemName)
+            if item.isSelected() and self.__splitName(itemName) in self.selectedItems: 
+                pass
+            elif item.isSelected() and self.__splitName(itemName) not in self.selectedItems:
+                self.selectedItems.append(self.__splitName(itemName))
+            elif not item.isSelected() and self.__splitName(itemName) in self.selectedItems: 
+                self.selectedItems.remove(self.__splitName(itemName))
+            elif not item.isSelected() and self.__splitName(itemName) not in self.selectedItems:
+                pass
+        pm.select(self.selectedItems, replace = True)
+        print ('selected items are %s'%self.selectedItems)
+
+
+    def __splitName(self, itemText):
+        if (r' --> ') in str(itemText):
+            objectOutputMesh = itemText.rpartition(' --> ')[2]
+            return objectOutputMesh             
         
         # clothEnabled = pm.getAttr('%s.isDynamic'%obj)
 

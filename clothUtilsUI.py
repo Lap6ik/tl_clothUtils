@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file '/home/explosiveprogrammers/Dev/tl_clothUtils/UI/clothUtilsUI.ui',
 # licensing of '/home/explosiveprogrammers/Dev/tl_clothUtils/UI/clothUtilsUI.ui' applies.
 #
-# Created: Sun Dec 15 10:41:08 2019
+# Created: Mon Dec 16 18:52:58 2019
 #      by: pyside2-uic  running on PySide2 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -80,14 +80,14 @@ class Ui_MainWindow(object):
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.widget_12)
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.colliderObjectListWidget = QtWidgets.QListWidget(self.widget_12)
+        self.colliderObjectsListWidget = QtWidgets.QListWidget(self.widget_12)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.colliderObjectListWidget.sizePolicy().hasHeightForWidth())
-        self.colliderObjectListWidget.setSizePolicy(sizePolicy)
-        self.colliderObjectListWidget.setObjectName("colliderObjectListWidget")
-        self.verticalLayout_6.addWidget(self.colliderObjectListWidget)
+        sizePolicy.setHeightForWidth(self.colliderObjectsListWidget.sizePolicy().hasHeightForWidth())
+        self.colliderObjectsListWidget.setSizePolicy(sizePolicy)
+        self.colliderObjectsListWidget.setObjectName("colliderObjectsListWidget")
+        self.verticalLayout_6.addWidget(self.colliderObjectsListWidget)
         self.horizontalLayout_4.addWidget(self.widget_12)
         self.verticalLayout_4.addWidget(self.widget_8)
         self.widget_10 = QtWidgets.QWidget(self.centralwidget)
