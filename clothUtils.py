@@ -3,6 +3,7 @@ from PySide2 import QtWidgets, QtGui, QtCore
 import os, sys
 # import shutil
 import pymel.core as pm
+from maya import OpenMaya
 # from importlib import reload
 
 import clothUtilsUI as ui
@@ -101,6 +102,31 @@ class ClothUtils(QtWidgets.QMainWindow):
         pm.select(self.selectedItems, replace = True)
         print ('selected items are %s'%self.selectedItems)
 
+    #callbacks.py
+
+    # def addNameChangedCallback(callback, pynode = None):
+    #     def omcallback(mobject, oldname, ):
+    #         newname = OpenMaya.MFnDependencyNode(mobject).name()
+    #         changedPynode = pm.PyNode(newname)
+    #         if not isvalidnode(changedPynode):
+    #             return
+    #         callback(changedPynode, oldname, newname)
+    #     if pynode is None:
+    #         listenTo = OpenMaya.MObject()
+    #     else:
+    #         listenTo = pynode.__apimobject__()
+    #     return OpenMaya.MNodeMessage.addNameChangedCallback(listenTo, omcallBack)
+        
+    # def _invalidnode(pynode)
+    #     try:
+    #         bool(pynode)
+    #         return True
+    #     except KeyError:
+    #         return False
+            
+    # def removeNameChangeCallBack(callBackID):
+    #     OpenMaya.MNodeMessage.removeCallback(callbackID)
+    
 
     def __splitName(self, itemText):
         if (r' --> ') in str(itemText):
@@ -115,15 +141,15 @@ class ClothUtils(QtWidgets.QMainWindow):
     def _printN(self):
         print('attribute changed') 
 
-# def main():
-#     '''
-#     Main function for starting the application
-#     '''
+def main():
+    '''
+    Main function for starting the application
+    '''
 
-#     app = QtWidgets.QApplication(sys.argv)
-#     widget = ClothUtils()
-#     widget.show()
-#     sys.exit(app.exec_())
+    app = QtWidgets.QApplication(sys.argv)
+    widget = ClothUtils()
+    widget.show()
+    sys.exit(app.exec_())
 
-# if __name__ == '__main__':
-#         main()
+if __name__ == '__main__':
+        main()
